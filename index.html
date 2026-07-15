@@ -1022,9 +1022,18 @@ let allGalleryItems = [];
 Object.entries(galleryData).forEach(([name, info]) => {
   for (let i = 1; i <= info.count; i++) {
     let imgName = info.prefix ? `${info.prefix} (${i}).jpg` : `${name} (${i}).jpg`;
-    let imgPath = `${info.dir}/${imgName}`;
+    let fullPath = `${info.dir}/${imgName}`;
+    let thumbPath = `thumbs/${name}/${imgName}`;
+    // 特殊目录：梦想田园和露营地的缩略图路径不同
+    if (info.dir.includes('梦想田园')) thumbPath = `thumbs/梦想田园网上照片/${imgName}`;
+    if (info.dir.includes('露营地')) thumbPath = `thumbs/露营地网上照片/${imgName}`;
+    if (info.dir.includes('叠空飞岩') && info.prefix === '红色纪念馆') {
+      thumbPath = `thumbs/叠空飞岩/${imgName}`;
+    }
     allGalleryItems.push({
-      name, path: imgPath,
+      name,
+      path: thumbPath,        // 画廊网格用缩略图
+      fullPath: fullPath,      // 灯箱用大图
       caption: `${name}${info.desc ? ' — ' + info.desc : ''}`,
       category: name
     });
@@ -1095,7 +1104,7 @@ function openLightbox(idx) {
   currentLightboxIdx = idx;
   const item = allGalleryItems[idx];
   if (!item) return;
-  lightboxImg.src = item.path;
+  lightboxImg.src = item.fullPath || item.path;
   lightboxCaption.textContent = item.caption;
   lightbox.classList.add('active');
 }
