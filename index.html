@@ -197,6 +197,7 @@ body {
   display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;
   max-width: 900px; margin-left: auto; margin-right: auto;
 }
+.branding-row-3 { grid-template-columns: 1fr 1fr 1fr; max-width: 1000px; }
 .branding-row:last-of-type { margin-bottom: 0; }
 .branding-card { text-align: center; }
 .branding-card-img {
@@ -487,7 +488,7 @@ body {
   .gallery-item.span-2x2, .gallery-item.span-2x1 { grid-column: span 2; }
   .gallery-item.span-1x2 { grid-row: span 1; }
   .form-row { grid-template-columns: 1fr; }
-  .branding-row { grid-template-columns: 1fr; }
+  .branding-row, .branding-row-3 { grid-template-columns: 1fr; }
   .branding-card-img { min-height: 200px; }
   .section { padding: 3.5rem 1rem; }
 }
@@ -582,7 +583,7 @@ body {
   </div>
 
   <!-- 文创产品 -->
-  <div class="branding-row reveal">
+  <div class="branding-row branding-row-3 reveal">
     <div class="branding-card">
       <div class="branding-card-img">
         <img src="品牌视觉/本草文创视觉图.jpg" alt="本草文创视觉图" loading="lazy">
@@ -594,6 +595,12 @@ body {
         <img src="品牌视觉/入谷物料包视觉图.jpg" alt="入谷物料包视觉图" loading="lazy">
       </div>
       <p class="branding-card-label">文创 · 入谷物料包</p>
+    </div>
+    <div class="branding-card">
+      <div class="branding-card-img">
+        <img src="品牌视觉/文创礼盒.jpg" alt="文创礼盒" loading="lazy">
+      </div>
+      <p class="branding-card-label">文创 · 山谷疗愈礼盒</p>
     </div>
   </div>
 
