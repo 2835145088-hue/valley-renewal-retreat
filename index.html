@@ -186,7 +186,7 @@ body {
 
 /* ========== 品牌视觉 ========== */
 .branding-logo {
-  max-width: 420px; margin: 0 auto 2.5rem; text-align: center;
+  max-width: 420px; margin: 0 auto 2.5rem; text-align: center; cursor: pointer;
 }
 .branding-logo img { max-width: 100%; max-height: 200px; object-fit: contain; }
 .branding-label {
@@ -577,26 +577,26 @@ body {
   </div>
 
   <!-- LOGO -->
-  <div class="branding-logo reveal">
+  <div class="branding-logo reveal" onclick="openBrandLightbox('品牌视觉/中英对照版.jpg','品牌标识 · 中英对照版')">
     <img src="品牌视觉/中英对照版.jpg" alt="山谷重启计划 - 中英对照版LOGO">
     <p class="branding-label">品牌标识 · 中英对照版</p>
   </div>
 
   <!-- 文创产品 -->
   <div class="branding-row branding-row-3 reveal">
-    <div class="branding-card">
+    <div class="branding-card" onclick="openBrandLightbox('品牌视觉/本草文创视觉图.jpg','文创 · 本草香囊与茶包')">
       <div class="branding-card-img">
         <img src="品牌视觉/本草文创视觉图.jpg" alt="本草文创视觉图" loading="lazy">
       </div>
       <p class="branding-card-label">文创 · 本草香囊与茶包</p>
     </div>
-    <div class="branding-card">
+    <div class="branding-card" onclick="openBrandLightbox('品牌视觉/入谷物料包视觉图.jpg','文创 · 入谷物料包')">
       <div class="branding-card-img">
         <img src="品牌视觉/入谷物料包视觉图.jpg" alt="入谷物料包视觉图" loading="lazy">
       </div>
       <p class="branding-card-label">文创 · 入谷物料包</p>
     </div>
-    <div class="branding-card">
+    <div class="branding-card" onclick="openBrandLightbox('品牌视觉/文创礼盒.jpg','文创 · 山谷疗愈礼盒')">
       <div class="branding-card-img">
         <img src="品牌视觉/文创礼盒.jpg" alt="文创礼盒" loading="lazy">
       </div>
@@ -606,13 +606,13 @@ body {
 
   <!-- 宣传册 -->
   <div class="branding-row reveal">
-    <div class="branding-card">
+    <div class="branding-card" onclick="openBrandLightbox('品牌视觉/宣传页（正）.jpg','宣传册 · 正面')">
       <div class="branding-card-img">
         <img src="品牌视觉/宣传页（正）.jpg" alt="宣传页正面" loading="lazy">
       </div>
       <p class="branding-card-label">宣传册 · 正面</p>
     </div>
-    <div class="branding-card">
+    <div class="branding-card" onclick="openBrandLightbox('品牌视觉/宣传页（反）.jpg','宣传册 · 反面')">
       <div class="branding-card-img">
         <img src="品牌视觉/宣传页（反）.jpg" alt="宣传页反面" loading="lazy">
       </div>
@@ -1117,6 +1117,13 @@ function openLightbox(idx) {
 }
 
 function closeLightbox() { lightbox.classList.remove('active'); }
+
+// 品牌视觉点击放大
+function openBrandLightbox(src, caption) {
+  lightboxImg.src = src;
+  lightboxCaption.textContent = caption;
+  lightbox.classList.add('active');
+}
 
 document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
