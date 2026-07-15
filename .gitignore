@@ -1,0 +1,4 @@
+node_modules/
+*.tmp
+~$*.docx
+extract_docx.ps1

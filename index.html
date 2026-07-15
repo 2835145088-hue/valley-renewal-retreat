@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>山谷重启计划——崤山小叠空疗愈型文旅课程品牌</title>
+<style>
+/* ========== 基础变量与重置 ========== */
+:root {
+  --green-deep: #2d4a2a;
+  --green-mid: #4a6b3f;
+  --green-light: #8a9e82;
+  --green-pale: #eef3ea;
+  --gold: #9a7b3a;
+  --gold-light: #b8a478;
+  --cream: #fafaf6;
+  --ink: #1e1e1e;
+  --ink-light: #5a5a5a;
+  --ink-lighter: #8a8a8a;
+  --white: #ffffff;
+  --border: #e8e5dd;
+  --shadow: 0 2px 16px rgba(0,0,0,0.06);
+  --shadow-md: 0 6px 28px rgba(0,0,0,0.10);
+  --radius: 8px;
+  --transition: 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.85;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========== 导航栏 ========== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 0 2rem; transition: var(--transition);
+}
+.nav.scrolled { box-shadow: var(--shadow); }
+.nav-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px;
+}
+.nav-logo {
+  font-size: 1.05rem; font-weight: 600; color: var(--green-deep);
+  letter-spacing: 1px; white-space: nowrap;
+}
+.nav-links { display: flex; list-style: none; gap: 2rem; flex-wrap: wrap; justify-content: flex-end; }
+.nav-links a {
+  text-decoration: none; color: var(--ink-light); font-size: 0.88rem; font-weight: 400;
+  transition: var(--transition); letter-spacing: 0.5px;
+}
+.nav-links a:hover { color: var(--green-deep); }
+
+.menu-btn { display: none; background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--ink); }
+
+/* ========== 首屏英雄区 ========== */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  text-align: center; position: relative;
+  background: url('封面底图.jpg') no-repeat center/cover;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(44,58,38,0.55) 0%, rgba(30,42,24,0.45) 100%);
+}
+.hero-content { position: relative; z-index: 1; padding: 2rem; max-width: 780px; }
+.hero-badge {
+  display: inline-block; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9);
+  padding: 0.35rem 1.4rem; border-radius: 2px; font-size: 0.8rem;
+  letter-spacing: 3px; margin-bottom: 2rem; font-weight: 500;
+  backdrop-filter: blur(4px);
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3.8rem); font-weight: 700;
+  color: #ffffff; line-height: 1.25; margin-bottom: 0.6rem;
+  letter-spacing: 4px; text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.hero .subtitle {
+  font-size: clamp(1rem, 2.2vw, 1.3rem); color: rgba(255,255,255,0.8);
+  margin-bottom: 0.6rem; font-weight: 300; letter-spacing: 2px;
+}
+.hero .tagline {
+  font-size: 0.9rem; color: rgba(255,255,255,0.65); letter-spacing: 5px;
+  margin-bottom: 2rem; font-weight: 400;
+}
+.hero-scroll {
+  position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+  animation: floatDown 2.2s ease-in-out infinite;
+}
+.hero-scroll span { font-size: 1.2rem; color: rgba(255,255,255,0.5); }
+@keyframes floatDown {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+  50% { transform: translateX(-50%) translateY(8px); opacity: 1; }
+}
+
+/* ========== 通用板块 ========== */
+.section { padding: 6rem 2rem; max-width: 1160px; margin: 0 auto; }
+.section-alt { background: #f5f7f2; }
+.section-header { text-align: center; margin-bottom: 3.5rem; }
+.section-header .en-label {
+  font-size: 0.72rem; color: var(--gold-light); letter-spacing: 4px;
+  text-transform: uppercase; margin-bottom: 0.5rem; font-weight: 500;
+}
+.section-header h2 {
+  font-size: clamp(1.6rem, 2.8vw, 2.2rem); color: var(--green-deep);
+  font-weight: 600; margin-bottom: 0.6rem; letter-spacing: 2px;
+}
+.section-header .divider {
+  width: 36px; height: 2px; background: var(--gold-light); margin: 0.8rem auto;
+}
+.section-header p { color: var(--ink-lighter); max-width: 560px; margin: 0 auto; font-size: 0.9rem; }
+
+/* 滚动渐入 */
+.reveal {
+  opacity: 0; transform: translateY(36px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ========== 品牌故事 ========== */
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.story-text h3 { font-size: 1.5rem; color: var(--green-deep); margin-bottom: 1.2rem; font-weight: 600; letter-spacing: 1px; }
+.story-text p { margin-bottom: 0.8rem; color: var(--ink-light); font-size: 0.92rem; }
+
+/* 品牌亮点卡片（替代原数字统计） */
+.story-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; align-content: start; }
+.highlight-card {
+  background: var(--white); padding: 1.8rem 1.5rem; border-radius: var(--radius);
+  box-shadow: var(--shadow); transition: var(--transition);
+  border-left: 3px solid transparent;
+}
+.highlight-card:nth-child(1) { border-left-color: var(--green-mid); }
+.highlight-card:nth-child(2) { border-left-color: var(--gold); }
+.highlight-card:nth-child(3) { border-left-color: var(--green-light); }
+.highlight-card:nth-child(4) { border-left-color: var(--gold-light); }
+.highlight-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.highlight-card .hl-num {
+  font-size: 2rem; font-weight: 700; color: var(--green-deep);
+  line-height: 1.2; margin-bottom: 0.2rem;
+}
+.highlight-card .hl-num.small { font-size: 1.5rem; }
+.highlight-card .hl-title {
+  font-size: 0.85rem; color: var(--ink-light); font-weight: 500;
+  margin-bottom: 0.4rem; letter-spacing: 1px;
+}
+.highlight-card .hl-desc {
+  font-size: 0.78rem; color: var(--ink-lighter); line-height: 1.5;
+}
+
+/* ========== 课程体系 ========== */
+.courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+.course-card {
+  background: var(--white); border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow); transition: var(--transition); border: 1px solid var(--border);
+}
+.course-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: #d8d5cc; }
+.course-card-label {
+  padding: 1.2rem 1.5rem; font-size: 0.75rem; letter-spacing: 3px;
+  color: var(--gold); font-weight: 600; border-bottom: 1px solid var(--border);
+  background: #fdfdfa;
+}
+.course-card-body { padding: 1.8rem 1.5rem; }
+.course-card-body h4 { font-size: 1.15rem; color: var(--ink); margin-bottom: 0.4rem; font-weight: 600; }
+.course-card-body .duration { font-size: 0.82rem; color: var(--ink-lighter); margin-bottom: 0.8rem; }
+.course-card-body .desc { font-size: 0.88rem; color: var(--ink-light); line-height: 1.7; margin-bottom: 1rem; }
+.course-card-body .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.course-card-body .tags span {
+  display: inline-block; background: var(--green-pale); color: var(--green-deep);
+  padding: 0.25rem 0.7rem; border-radius: 2px; font-size: 0.76rem;
+}
+
+/* ========== 品牌视觉 ========== */
+.branding-single { max-width: 500px; margin: 0 auto; text-align: center; }
+.branding-img {
+  background: var(--white); padding: 3rem; border-radius: var(--radius);
+  box-shadow: var(--shadow); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.branding-img:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.branding-img img { max-width: 100%; max-height: 240px; object-fit: contain; }
+.branding-label {
+  margin-top: 0.8rem; font-size: 0.82rem; color: var(--ink-lighter);
+  letter-spacing: 2px;
+}
+
+/* ========== 产品结构 ========== */
+.core-products { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+.core-card {
+  background: var(--white); padding: 2rem; border-radius: var(--radius);
+  box-shadow: var(--shadow); border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.core-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.core-card-label {
+  font-size: 0.68rem; letter-spacing: 3px; color: var(--gold); margin-bottom: 0.5rem; font-weight: 600;
+}
+.core-card h4 { font-size: 1.2rem; color: var(--green-deep); margin-bottom: 0.6rem; font-weight: 600; }
+.core-card .core-desc { font-size: 0.88rem; color: var(--ink-light); line-height: 1.7; margin-bottom: 1rem; }
+.core-card .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.core-card .tags span {
+  display: inline-block; background: var(--green-pale); color: var(--green-deep);
+  padding: 0.25rem 0.7rem; border-radius: 2px; font-size: 0.75rem;
+}
+
+.extensions { margin-bottom: 2.5rem; }
+.ext-title {
+  text-align: center; font-size: 0.75rem; letter-spacing: 3px; color: var(--ink-lighter);
+  margin-bottom: 1.2rem; font-weight: 500;
+}
+.ext-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+.ext-item {
+  background: var(--white); padding: 1.3rem; border-radius: var(--radius);
+  box-shadow: var(--shadow); border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.ext-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.ext-num {
+  font-size: 0.7rem; color: var(--gold-light); letter-spacing: 2px; margin-bottom: 0.4rem;
+}
+.ext-item h5 { font-size: 0.9rem; color: var(--ink); margin-bottom: 0.3rem; font-weight: 600; }
+.ext-item p { font-size: 0.78rem; color: var(--ink-light); line-height: 1.6; }
+
+/* ========== 课程概述 ========== */
+.overview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.overview-card {
+  background: var(--white); padding: 2.2rem; border-radius: var(--radius);
+  box-shadow: var(--shadow); border: 1px solid var(--border);
+  transition: var(--transition);
+}
+.overview-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.ov-label {
+  font-size: 0.68rem; letter-spacing: 3px; color: var(--gold); margin-bottom: 0.5rem; font-weight: 600;
+}
+.overview-card h4 { font-size: 1.2rem; color: var(--green-deep); margin-bottom: 0.6rem; font-weight: 600; }
+.ov-desc { font-size: 0.88rem; color: var(--ink-light); line-height: 1.7; margin-bottom: 1.2rem; }
+.ov-path { background: var(--green-pale); padding: 1rem 1.2rem; border-radius: var(--radius); }
+.ov-path-title { font-size: 0.75rem; letter-spacing: 2px; color: var(--ink-lighter); margin-bottom: 0.6rem; }
+.ov-path-items, .ov-path-flow { display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem; }
+.ov-path-items span, .ov-path-flow span {
+  font-size: 0.82rem; color: var(--green-deep); font-weight: 500;
+  background: var(--white); padding: 0.3rem 0.7rem; border-radius: 2px;
+}
+.path-arrow { color: var(--gold-light) !important; background: none !important; padding: 0 0.2rem !important; font-weight: 400 !important; }
+
+/* ========== 面向对象 ========== */
+.audience-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 2rem; }
+.audience-card {
+  background: var(--white); padding: 1.5rem 1.2rem; border-radius: var(--radius);
+  box-shadow: var(--shadow); border: 1px solid var(--border); transition: var(--transition);
+}
+.audience-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.audience-num {
+  font-size: 1.6rem; font-weight: 300; color: var(--green-light);
+  line-height: 1; margin-bottom: 0.6rem;
+}
+.audience-card h5 { font-size: 0.95rem; color: var(--green-deep); margin-bottom: 0.2rem; font-weight: 600; }
+.audience-age { font-size: 0.72rem; color: var(--ink-lighter); margin-bottom: 0.6rem; }
+.audience-card p { font-size: 0.8rem; color: var(--ink-light); line-height: 1.6; }
+
+.b2b-note {
+  background: var(--white); padding: 1.5rem 2rem; border-radius: var(--radius);
+  box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 1rem;
+}
+.b2b-note p { font-size: 0.88rem; color: var(--ink-light); line-height: 1.8; }
+
+.position-strip {
+  background: var(--green-deep); padding: 1.5rem 2rem; border-radius: var(--radius);
+  color: rgba(255,255,255,0.9); text-align: center;
+}
+.position-strip p { font-size: 0.85rem; letter-spacing: 1px; line-height: 1.8; }
+.position-strip p strong { color: #ffffff; font-weight: 600; }
+.position-diff { margin-top: 0.4rem; font-size: 0.82rem !important; color: rgba(255,255,255,0.7) !important; }
+
+/* ========== 研学空间画廊 ========== */
+.gallery-filter { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.5rem; }
+.gallery-filter button {
+  background: var(--white); border: 1px solid var(--border); color: var(--ink-light);
+  padding: 0.45rem 1rem; border-radius: 2px; cursor: pointer;
+  font-size: 0.8rem; letter-spacing: 1px; transition: var(--transition);
+}
+.gallery-filter button:hover, .gallery-filter button.active {
+  background: var(--green-deep); color: white; border-color: var(--green-deep);
+}
+
+/* 便当盒画廊布局 */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 180px;
+  gap: 10px;
+}
+.gallery-item {
+  border-radius: var(--radius); overflow: hidden; cursor: pointer;
+  position: relative; box-shadow: var(--shadow); transition: var(--transition);
+  background: var(--green-pale); /* 骨架屏底色 */
+}
+.gallery-item:hover { transform: scale(1.015); box-shadow: var(--shadow-md); z-index: 2; }
+.gallery-item img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  opacity: 0; transition: opacity 0.4s ease;
+}
+.gallery-item img.loaded { opacity: 1; }
+.gallery-item .caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.65));
+  color: white; padding: 1.2rem 0.8rem 0.6rem; font-size: 0.8rem; letter-spacing: 0.5px;
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.gallery-item img.loaded ~ .caption { opacity: 1; }
+
+/* 便当盒尺寸变体 */
+.gallery-item.span-2x2 { grid-column: span 2; grid-row: span 2; }
+.gallery-item.span-2x1 { grid-column: span 2; grid-row: span 1; }
+.gallery-item.span-1x2 { grid-column: span 1; grid-row: span 2; }
+
+/* 骨架屏闪烁动画 */
+.gallery-item .skeleton-shimmer {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg,
+    var(--green-pale) 25%,
+    #e8efe4 37%,
+    var(--green-pale) 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+.gallery-item img.loaded + .skeleton-shimmer { display: none; }
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* 灯箱 */
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.94); justify-content: center; align-items: center;
+}
+.lightbox.active { display: flex; }
+.lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 2px; }
+.lightbox-close {
+  position: absolute; top: 1.2rem; right: 1.8rem; color: rgba(255,255,255,0.7);
+  font-size: 2rem; cursor: pointer; background: none; border: none; transition: var(--transition);
+}
+.lightbox-close:hover { color: white; }
+.lightbox-caption { position: absolute; bottom: 1.8rem; color: rgba(255,255,255,0.75); font-size: 0.85rem; letter-spacing: 1px; }
+
+/* ========== 品牌价值 ========== */
+.value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.value-card {
+  background: var(--white); padding: 2.5rem 2rem; border-radius: var(--radius);
+  box-shadow: var(--shadow); transition: var(--transition); border: 1px solid var(--border);
+}
+.value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.value-card .v-label {
+  font-size: 0.7rem; letter-spacing: 3px; color: var(--gold); margin-bottom: 0.8rem;
+  font-weight: 600; text-transform: uppercase;
+}
+.value-card h4 { font-size: 1.1rem; color: var(--ink); margin-bottom: 0.6rem; font-weight: 600; }
+.value-card p { font-size: 0.88rem; color: var(--ink-light); line-height: 1.7; }
+
+/* ========== 商业模式 ========== */
+.biz-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+.biz-item {
+  background: var(--white); padding: 1.5rem 1.2rem; border-radius: var(--radius);
+  box-shadow: var(--shadow); border-top: 2px solid var(--green-pale);
+  transition: var(--transition);
+}
+.biz-item:hover { border-top-color: var(--green-mid); }
+.biz-item h5 { font-size: 0.82rem; color: var(--green-deep); margin-bottom: 0.4rem; font-weight: 600; letter-spacing: 0.5px; }
+.biz-item p { font-size: 0.78rem; color: var(--ink-light); line-height: 1.6; }
+
+/* ========== 下载区 ========== */
+.download-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
+.download-card {
+  background: var(--white); padding: 1.6rem 1.5rem; border-radius: var(--radius);
+  box-shadow: var(--shadow); transition: var(--transition); text-decoration: none; color: var(--ink);
+  display: flex; align-items: center; gap: 1rem; border: 1px solid var(--border);
+}
+.download-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #d8d5cc; }
+.download-card .dl-icon {
+  width: 44px; height: 44px; border-radius: 50%; background: var(--green-pale);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--green-deep); font-size: 0.9rem; font-weight: 700; flex-shrink: 0;
+}
+.download-info h5 { font-size: 0.9rem; margin-bottom: 0.2rem; font-weight: 500; }
+.download-info span { font-size: 0.78rem; color: var(--ink-lighter); }
+
+/* ========== 页脚 ========== */
+.footer {
+  background: #1c2019; color: #8a9882; text-align: center; padding: 3.5rem 2rem;
+}
+.footer h3 { color: #d0d8c8; font-size: 1.2rem; margin-bottom: 0.5rem; font-weight: 500; letter-spacing: 3px; }
+.footer p { font-size: 0.82rem; margin-bottom: 0.3rem; letter-spacing: 1px; }
+.footer .comp { color: var(--gold-light); margin-top: 1.2rem; font-size: 0.75rem; letter-spacing: 2px; }
+
+/* ========== 响应式 ========== */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex; flex-direction: column; position: absolute; top: 68px;
+    left: 0; right: 0; background: var(--cream); padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border); gap: 0.8rem; z-index: 1000;
+  }
+  .menu-btn { display: block; }
+  .story-grid, .value-grid, .biz-grid { grid-template-columns: 1fr; }
+  .core-products, .overview-grid { grid-template-columns: 1fr; }
+  .ext-grid { grid-template-columns: repeat(2, 1fr); }
+  .audience-grid { grid-template-columns: 1fr; }
+  .courses-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+  .gallery-item.span-2x2, .gallery-item.span-2x1 { grid-column: span 2; }
+  .gallery-item.span-1x2 { grid-row: span 1; }
+  .section { padding: 3.5rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== 导航栏 ==================== -->
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">山谷重启计划</div>
+    <button class="menu-btn" id="menuBtn" aria-label="菜单">&#9776;</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#story">品牌故事</a></li>
+      <li><a href="#branding">品牌视觉</a></li>
+      <li><a href="#courses">产品结构</a></li>
+      <li><a href="#journey">课程概述</a></li>
+      <li><a href="#audience">面向对象</a></li>
+      <li><a href="#spaces">研学空间</a></li>
+      <li><a href="#value">品牌价值</a></li>
+      <li><a href="#business">商业模式</a></li>
+      <li><a href="#download">资源下载</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ==================== 首屏英雄区 ==================== -->
+<header class="hero">
+  <div class="hero-content reveal">
+    <div class="hero-badge">建行裕农通杯 &middot; 乡村振兴大赛</div>
+    <h1>山谷重启计划</h1>
+    <p class="subtitle">崤山小叠空 &middot; 疗愈型文旅课程品牌</p>
+    <p class="tagline">卸下重负 &middot; 重启身心 &middot; 回归自然</p>
+  </div>
+  <div class="hero-scroll"><span>&#8964;</span></div>
+</header>
+
+<!-- ==================== 品牌故事 ==================== -->
+<section class="section" id="story">
+  <div class="section-header reveal">
+    <div class="en-label">Brand Story</div>
+    <h2>品牌故事</h2>
+    <div class="divider"></div>
+    <p>在崤山小叠空的山水之间，我们为都市人打造一处身心疗愈的栖息地</p>
+  </div>
+  <div class="story-grid">
+    <div class="story-text reveal">
+      <h3>当都市遇见山谷</h3>
+      <p>「山谷重启计划」是扎根于浙江崤山小叠空自然生态区、以葛洪中医药文化为底蕴的疗愈型文旅课程品牌。品牌以<strong>"科学减压、关系重建、生活锚点重塑"</strong>为核心价值主张，面向长期处于高压、亚健康及关系失衡状态的城市人群，提供自然体验、心理疏导、文化浸润与生活规划相结合的课程服务。</p>
+      <p>课程以现代心理学中的自我觉察、压力管理、人际边界与社交支持等方法为骨架，同时汲取葛洪"养生以不伤为本"等传统道家养生思想，使自然疗愈与在地文化共同构成完整的课程体系。</p>
+      <p>品牌强调<strong>"慢"而非"满"</strong>&mdash;&mdash;不追求在短时间内灌输大量内容，而是让参与者在缓慢的节奏中觉察自己的状态，在课程中练习并找到适合自己的调节方法，将改变真正带入日常生活。</p>
+    </div>
+    <div class="story-highlights reveal">
+      <div class="highlight-card">
+        <div class="hl-num">4<span style="font-size:1rem;font-weight:400;">&nbsp;阶递进</span></div>
+        <div class="hl-title">科学疗愈模型</div>
+        <div class="hl-desc">觉察 &rarr; 释放 &rarr; 重建 &rarr; 巩固，形成完整的心理成长闭环</div>
+      </div>
+      <div class="highlight-card">
+        <div class="hl-num">11<span style="font-size:1rem;font-weight:400;">&nbsp;处空间</span></div>
+        <div class="hl-title">全域在地联动</div>
+        <div class="hl-desc">书院、禅寺、丹谷、田园等多元空间整合为统一课程产品</div>
+      </div>
+      <div class="highlight-card">
+        <div class="hl-num small">双轨融合</div>
+        <div class="hl-title">跨学科方法论</div>
+        <div class="hl-desc">现代心理学循证框架 &times; 葛洪道医养生千年智慧</div>
+      </div>
+      <div class="highlight-card">
+        <div class="hl-num small">精品小班</div>
+        <div class="hl-title">深度个性化交付</div>
+        <div class="hl-desc">每期限额招生，1:4师生配比，30天后续跟踪陪伴</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 品牌视觉 ==================== -->
+<section class="section" id="branding">
+  <div class="section-header reveal">
+    <div class="en-label">Brand Identity</div>
+    <h2>品牌视觉</h2>
+    <div class="divider"></div>
+    <p>山谷重启计划品牌标识系统</p>
+  </div>
+
+  <div class="branding-single reveal">
+    <div class="branding-img">
+      <img src="品牌LOGO/中英对照版.png" alt="山谷重启计划 - 中英对照版LOGO">
+    </div>
+    <p class="branding-label">山谷重启计划 · 品牌标识</p>
+  </div>
+</section>
+
+<!-- ==================== 产品结构 ==================== -->
+<section class="section section-alt" id="courses">
+  <div class="section-header reveal">
+    <div class="en-label">Product Structure</div>
+    <h2>产品结构</h2>
+    <div class="divider"></div>
+    <p>从低门槛体验到深度课程再到持续陪伴，构建完整的服务生态</p>
+  </div>
+
+  <!-- 两项核心产品 -->
+  <div class="core-products reveal">
+    <div class="core-card">
+      <div class="core-card-label">CORE 01</div>
+      <h4>山谷两日 &middot; 轻重启周末营</h4>
+      <p class="core-desc">满足周末短途休养、快速卸压和生活微调需求，适合个人客户及短期团体。以减压放松、情绪觉察、自然体验和初步生活梳理为核心，突出轻量入门与高可实践性。</p>
+      <div class="tags">
+        <span>2天1夜</span><span>周末短程</span><span>个人&小团体</span><span>轻量入门</span><span>快速卸压</span>
+      </div>
+    </div>
+    <div class="core-card">
+      <div class="core-card-label">CORE 02</div>
+      <h4>山谷七日 &middot; 身心重启计划</h4>
+      <p class="core-desc">适合需要系统休养、关系整理和生活秩序调整的个人及单位团体。按照"入谷&mdash;觉察&mdash;身体&mdash;草木&mdash;归己&mdash;重建&mdash;出谷"的路径逐步展开，形成完整的疗愈闭环。</p>
+      <div class="tags">
+        <span>7天6夜</span><span>系统深度</span><span>个人&单位团体</span><span>七阶递进</span><span>疗愈闭环</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 延伸产品 -->
+  <div class="extensions reveal">
+    <div class="ext-title">延伸产品矩阵</div>
+    <div class="ext-grid">
+      <div class="ext-item">
+        <div class="ext-num">01</div>
+        <h5>山谷微重启</h5>
+        <p>半日或一日引流体验，降低首次参与门槛，触达更广泛的潜在用户</p>
+      </div>
+      <div class="ext-item">
+        <div class="ext-num">02</div>
+        <h5>企业与社群定制减压营</h5>
+        <p>面向企事业单位、工会、学校的主题化疗休养与员工关怀方案</p>
+      </div>
+      <div class="ext-item">
+        <div class="ext-num">03</div>
+        <h5>30天线上陪伴</h5>
+        <p>营后持续跟踪与支持，实现从"一次性营期"到"持续性关系"的转化</p>
+      </div>
+      <div class="ext-item">
+        <div class="ext-num">04</div>
+        <h5>山谷疗愈文创</h5>
+        <p>本草香囊、茶包、照片手账、主题礼盒等，承载品牌记忆与课后复购</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 课程概述 ==================== -->
+<section class="section" id="journey">
+  <div class="section-header reveal">
+    <div class="en-label">Course Overview</div>
+    <h2>课程概述</h2>
+    <div class="divider"></div>
+    <p>两项核心课程，两种重启路径，满足不同深度与节奏的需求</p>
+  </div>
+
+  <div class="overview-grid reveal">
+    <!-- 两日课程 -->
+    <div class="overview-card">
+      <div class="ov-label">WEEKEND RETREAT</div>
+      <h4>山谷两日 &middot; 轻重启周末营</h4>
+      <p class="ov-desc">主要满足周末短途休养、快速卸压和生活微调需求，适合个人客户及短期团体。在两天一夜的节奏中，帮助都市人在最短时间内完成从紧绷到松弛的状态切换，获得可带回日常生活的实用自我调节工具。</p>
+      <div class="ov-path">
+        <div class="ov-path-title">第一日</div>
+        <div class="ov-path-items">
+          <span>卸负归谷·轻启入山</span>
+        </div>
+        <div class="ov-path-title" style="margin-top:0.8rem;">第二日</div>
+        <div class="ov-path-items">
+          <span>携能出山·归境致知</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 七日课程 -->
+    <div class="overview-card">
+      <div class="ov-label">FLAGSHIP PROGRAM</div>
+      <h4>山谷七日 &middot; 身心重启计划</h4>
+      <p class="ov-desc">适合需要系统休养、关系整理和生活秩序调整的个人及单位团体。七日课程按照七阶路径逐步展开，每一阶段在前一阶段基础上递进深入，形成从外到内、再从内到外的完整疗愈闭环。</p>
+      <div class="ov-path">
+        <div class="ov-path-title">七阶递进路径</div>
+        <div class="ov-path-flow">
+          <span>入谷</span><span class="path-arrow">&rarr;</span>
+          <span>觉察</span><span class="path-arrow">&rarr;</span>
+          <span>身体</span><span class="path-arrow">&rarr;</span>
+          <span>草木</span><span class="path-arrow">&rarr;</span>
+          <span>归己</span><span class="path-arrow">&rarr;</span>
+          <span>重建</span><span class="path-arrow">&rarr;</span>
+          <span>出谷</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 面向对象 ==================== -->
+<section class="section section-alt" id="audience">
+  <div class="section-header reveal">
+    <div class="en-label">Target Audience</div>
+    <h2>面向对象</h2>
+    <div class="divider"></div>
+    <p>精准服务五类核心群体，同时辐射B端组织客户</p>
+  </div>
+
+  <div class="audience-grid reveal">
+    <div class="audience-card">
+      <div class="audience-num">01</div>
+      <h5>都市女性</h5>
+      <p class="audience-age">25&mdash;55岁</p>
+      <p>关注自我成长与身心平衡，面临职场压力、家庭角色和年龄焦虑的多重挑战，寻求一处可以真正放松并重新审视生活的空间。</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-num">02</div>
+      <h5>高压职场人士</h5>
+      <p class="audience-age">企业管理层、创业者、互联网从业者</p>
+      <p>长期处于高强度工作节奏中，存在睡眠障碍、情绪耗竭和职业倦怠风险，需要系统性的压力管理与身心修复方案。</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-num">03</div>
+      <h5>教师群体</h5>
+      <p class="audience-age">中小学及高校教师</p>
+      <p>面临教学任务、科研考核和家校沟通的多重压力，寒暑假为深度参与提供了时间窗口，是团体定制的重要客源。</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-num">04</div>
+      <h5>公务员</h5>
+      <p class="audience-age">基层公务员及机关事业单位人员</p>
+      <p>日常工作压力大且疏解渠道有限，职工疗休养政策为课程提供了制度性入口，适合以单位团体形式参与。</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-num">05</div>
+      <h5>成长型社群</h5>
+      <p class="audience-age">心理学爱好者、瑜伽修行者、传统文化研习者</p>
+      <p>已有自我探索习惯，追求更深层的身心整合与文化浸润，是品牌口碑传播和社群裂变的核心节点。</p>
+    </div>
+  </div>
+
+  <div class="b2b-note reveal">
+    <p>除五类个人客群外，品牌同时面向<strong>企事业单位、工会、学校及行业组织</strong>提供主题化疗休养与员工关怀定制服务。核心客源以<strong>杭州及长三角周边城市</strong>为主，逐步覆盖具有周末度假和主题旅居需求的其他城市客群。</p>
+  </div>
+
+
+<!-- ==================== 研学空间 ==================== -->
+<section class="section section-alt" id="spaces">
+  <div class="section-header reveal">
+    <div class="en-label">Study Spaces</div>
+    <h2>在地研学空间</h2>
+    <div class="divider"></div>
+    <p>11处精心选择的在地空间，每一处都承载着独特的疗愈与学习功能</p>
+  </div>
+  <div class="gallery-filter reveal" id="galleryFilter">
+    <button class="active" data-filter="叠空书院">叠空书院</button>
+    <button data-filter="叠空之境">叠空之境</button>
+    <button data-filter="叠空山居">叠空山居</button>
+    <button data-filter="叠空飞岩">叠空飞岩</button>
+    <button data-filter="禅茶林语">禅茶林语</button>
+    <button data-filter="葛洪博悟馆">葛洪博悟馆</button>
+    <button data-filter="葛洪丹谷">葛洪丹谷</button>
+    <button data-filter="迴龙寺">迴龙寺</button>
+    <button data-filter="梦想田园">梦想田园</button>
+    <button data-filter="露营地">露营地</button>
+    <button data-filter="红色纪念馆">红色纪念馆</button>
+  </div>
+  <div class="gallery-grid reveal" id="galleryGrid"></div>
+</section>
+
+<!-- 灯箱 -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <img src="" alt="" id="lightboxImg">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<!-- ==================== 品牌价值 ==================== -->
+<section class="section" id="value">
+  <div class="section-header reveal">
+    <div class="en-label">Brand Value</div>
+    <h2>品牌价值</h2>
+    <div class="divider"></div>
+    <p>为不同群体创造独特价值，实现多方共赢</p>
+  </div>
+  <div class="value-grid">
+    <div class="value-card reveal">
+      <div class="v-label">For Individual</div>
+      <h4>对个人参与者</h4>
+      <p>不仅是几天的休息，更是从压力中"转个弯"的机会。通过课程了解自身状态，学会情绪调节、人际边界和日常自我关怀的方法，将山谷的体验转化为持续的生活改变。</p>
+    </div>
+    <div class="value-card reveal">
+      <div class="v-label">For Organization</div>
+      <h4>对企业与组织</h4>
+      <p>为员工提供真正有深度的人文关怀方案，区别于传统旅游团建。课程兼顾身心放松与组织关怀，可根据团队需求定制内容，让参与者感受到组织的温度。</p>
+    </div>
+    <div class="value-card reveal">
+      <div class="v-label">For Village</div>
+      <h4>对在地乡村</h4>
+      <p>将分散的住宿、餐饮、田园和文化资源整合为统一的文旅产品，延长访客停留时间，带动农产品、茶叶和文创消费，为村民创造就业与增收机会，助力乡村振兴。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 商业模式 ==================== -->
+<section class="section section-alt" id="business">
+  <div class="section-header reveal">
+    <div class="en-label">Business Model</div>
+    <h2>商业模式</h2>
+    <div class="divider"></div>
+    <p>轻资产、标准化运营，以课程为核心驱动多元收入</p>
+  </div>
+  <div class="biz-grid reveal">
+    <div class="biz-item">
+      <h5>客户群体</h5>
+      <p>25-55岁都市女性、高压职场人士、教师医护群体、企业工会组织</p>
+    </div>
+    <div class="biz-item">
+      <h5>价值主张</h5>
+      <p>科学减压 &times; 关系重建 &times; 生活锚点重塑，道家养生融合现代心理学</p>
+    </div>
+    <div class="biz-item">
+      <h5>渠道通路</h5>
+      <p>小红书种草、微信公众号深度内容、企业直推、学员口碑裂变</p>
+    </div>
+    <div class="biz-item">
+      <h5>收入来源</h5>
+      <p>课程费用（核心）、团体定制、后续跟踪服务、在地文创与农产品</p>
+    </div>
+    <div class="biz-item">
+      <h5>核心资源</h5>
+      <p>11处在地空间、专业师资团队、标准化课程体系、葛洪文化IP</p>
+    </div>
+    <div class="biz-item">
+      <h5>关键合作</h5>
+      <p>在地民宿与农家乐、农产品供应商、文化场馆、企业HR与工会</p>
+    </div>
+    <div class="biz-item">
+      <h5>运营模式</h5>
+      <p>轻资产运营，在地资源整合，标准化手册驱动，小班预约制</p>
+    </div>
+    <div class="biz-item">
+      <h5>发展规划</h5>
+      <p>初期100万启动，三步走：周末营验证 &rarr; 七日营打磨 &rarr; 品牌输出与加盟</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 资源下载 ==================== -->
+<section class="section" id="download">
+  <div class="section-header reveal">
+    <div class="en-label">Resources</div>
+    <h2>资源下载</h2>
+    <div class="divider"></div>
+    <p>课程相关附件资料，了解更多细节</p>
+  </div>
+  <div class="download-grid reveal">
+    <a class="download-card" href="附件/附件1 《山谷重启计划·露营活动须知》.docx" download>
+      <div class="dl-icon">01</div>
+      <div class="download-info">
+        <h5>露营活动须知</h5>
+        <span>了解露营活动安排与注意事项</span>
+      </div>
+    </a>
+    <a class="download-card" href="附件/附件2 《山谷重启计划·健康状况告知书》.docx" download>
+      <div class="dl-icon">02</div>
+      <div class="download-info">
+        <h5>健康状况告知书</h5>
+        <span>参与前健康信息登记与安全提示</span>
+      </div>
+    </a>
+    <a class="download-card" href="附件/附件3 《山谷重启计划·生活重启蓝图》.docx" download>
+      <div class="dl-icon">03</div>
+      <div class="download-info">
+        <h5>生活重启蓝图</h5>
+        <span>个人成长规划手册，记录转变轨迹</span>
+      </div>
+    </a>
+    <a class="download-card" href="附件/附件4  山谷七日物资清单.xlsx" download>
+      <div class="dl-icon">04</div>
+      <div class="download-info">
+        <h5>七日物资清单</h5>
+        <span>七日深度营所需装备与物品清单</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="footer">
+  <h3>山谷重启计划</h3>
+  <p>崤山小叠空 &middot; 疗愈型文旅课程品牌</p>
+  <p>卸下重负 &middot; 重启身心 &middot; 回归自然</p>
+  <p class="comp">建行裕农通杯 &middot; 乡村振兴大赛 参赛项目</p>
+</footer>
+
+<script>
+/* ========== 导航滚动效果 ========== */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+});
+
+/* 移动端菜单 */
+const menuBtn = document.getElementById('menuBtn');
+const navLinks = document.getElementById('navLinks');
+menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+/* ========== 滚动渐入动画 ========== */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ========== 图片画廊数据 ========== */
+const galleryData = {
+  '叠空书院': { dir: '实地图集/叠空书院', count: 17, desc: '静心阅读与书写空间' },
+  '叠空之境': { dir: '实地图集/叠空之境', count: 4, desc: '冥想与自我觉察场所' },
+  '叠空山居': { dir: '实地图集/叠空山居', count: 7, desc: '依山而建的住宿体验' },
+  '叠空飞岩': { dir: '实地图集/叠空飞岩', count: 3, desc: '登高望远，放飞心绪' },
+  '禅茶林语': { dir: '实地图集/禅茶林语', count: 4, desc: '茶禅一味，以茶会友' },
+  '葛洪博悟馆': { dir: '实地图集/葛洪博悟馆', count: 40, desc: '葛洪中医药文化研学' },
+  '葛洪丹谷': { dir: '实地图集/葛洪丹谷', count: 14, desc: '药食同源与丹道文化' },
+  '迴龙寺': { dir: '实地图集/迴龙寺', count: 32, desc: '千年古刹，禅修静心' },
+  '梦想田园': { dir: '实地图集/梦想田园网上照片', count: 3, desc: '田园耕作，回归土地' },
+  '露营地': { dir: '实地图集/露营地网上照片', count: 5, prefix: '露营基地', desc: '星空露营，篝火夜话' },
+  '红色纪念馆': { dir: '实地图集/叠空飞岩', count: 4, prefix: '红色纪念馆', desc: '在地红色文化学习' }
+};
+
+const galleryGrid = document.getElementById('galleryGrid');
+let allGalleryItems = [];
+
+Object.entries(galleryData).forEach(([name, info]) => {
+  for (let i = 1; i <= info.count; i++) {
+    let imgName = info.prefix ? `${info.prefix} (${i}).jpg` : `${name} (${i}).jpg`;
+    let imgPath = `${info.dir}/${imgName}`;
+    allGalleryItems.push({
+      name, path: imgPath,
+      caption: `${name}${info.desc ? ' — ' + info.desc : ''}`,
+      category: name
+    });
+  }
+});
+
+function getBentoClass(idx) {
+  // 便当盒布局：每6个为一组，分配不同尺寸形成对比
+  const pattern = idx % 6;
+  if (pattern === 0) return 'span-2x2';  // 大卡片
+  if (pattern === 1) return 'span-2x1';  // 宽卡片
+  if (pattern === 3) return 'span-1x2';  // 高卡片
+  return '';                               // 标准卡片
+}
+
+function renderGallery(items) {
+  galleryGrid.innerHTML = items.map((item, idx) => `
+    <div class="gallery-item ${getBentoClass(idx)}" data-global-idx="${allGalleryItems.indexOf(item)}">
+      <img src="${item.path}" alt="${item.caption}" loading="lazy" onerror="this.closest('.gallery-item').remove()">
+      <div class="skeleton-shimmer"></div>
+      <div class="caption">${item.caption}</div>
+    </div>
+  `).join('');
+
+  // 图片加载完成后移除骨架屏
+  galleryGrid.querySelectorAll('img').forEach(img => {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('loaded'));
+    }
+    img.addEventListener('error', () => {
+      // 加载失败的图片隐藏，同时移除骨架
+      const shimmer = img.parentElement.querySelector('.skeleton-shimmer');
+      if (shimmer) shimmer.style.display = 'none';
+    });
+  });
+}
+
+galleryGrid.addEventListener('click', (e) => {
+  const item = e.target.closest('.gallery-item');
+  if (!item) return;
+  const idx = parseInt(item.dataset.globalIdx);
+  if (!isNaN(idx) && idx >= 0) openLightbox(idx);
+});
+
+// 默认显示第一个分类
+const defaultCategory = allGalleryItems.filter(i => i.category === '叠空书院');
+renderGallery(defaultCategory);
+
+/* 画廊筛选 */
+document.getElementById('galleryFilter').addEventListener('click', (e) => {
+  if (e.target.tagName !== 'BUTTON') return;
+  document.querySelectorAll('#galleryFilter button').forEach(b => b.classList.remove('active'));
+  e.target.classList.add('active');
+  const filter = e.target.dataset.filter;
+  const items = allGalleryItems.filter(i => i.category === filter);
+  renderGallery(items);
+});
+
+/* ========== 灯箱 ========== */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCaption = document.getElementById('lightboxCaption');
+let currentLightboxIdx = -1;
+
+function openLightbox(idx) {
+  currentLightboxIdx = idx;
+  const item = allGalleryItems[idx];
+  if (!item) return;
+  lightboxImg.src = item.path;
+  lightboxCaption.textContent = item.caption;
+  lightbox.classList.add('active');
+}
+
+function closeLightbox() { lightbox.classList.remove('active'); }
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('active')) return;
+  if (e.key === 'Escape') { closeLightbox(); return; }
+  if (e.key === 'ArrowLeft' && currentLightboxIdx > 0) openLightbox(currentLightboxIdx - 1);
+  if (e.key === 'ArrowRight' && currentLightboxIdx < allGalleryItems.length - 1) openLightbox(currentLightboxIdx + 1);
+});
+</script>
+</body>
+</html>
